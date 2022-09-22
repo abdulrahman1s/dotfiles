@@ -10,6 +10,7 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' menu select
 
+. ~/.config/zsh/variables.zsh
 . ~/.config/zsh/zinit.zsh
 . ~/.config/zsh/plugins.zsh
 . ~/.config/zsh/aliases.zsh
