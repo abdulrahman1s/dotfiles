@@ -14,3 +14,8 @@ alias shutup="killall -KILL"
 alias \$=""
 
 function what() { curl cheat.sh/$@ }
+function add_path() {
+		p=$1
+		echo "export PATH=\"\$PATH:${p/$HOME/\$HOME}\"" >> ~/.config/zsh/variables.zsh
+		source ~/.config/zsh/variables.zsh
+}
