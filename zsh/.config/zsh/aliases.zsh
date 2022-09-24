@@ -9,6 +9,8 @@ alias vim="nvim"
 alias v="nvim"
 alias ls="exa -la --icons --no-permissions --no-user --git"
 alias tree="exa --tree --icons"
+alias untar="tar -xzvf"
+alias shutup="killall -KILL"
 alias \$=""
 
 function what() { curl cheat.sh/$@ }
