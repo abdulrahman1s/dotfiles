@@ -69,14 +69,19 @@ return packer.startup(function(use)
 		"rafamadriz/friendly-snippets"
 	}
 
-	-- Buffer line
 	use {
 		'RRethy/vim-illuminate',
 		config = function() require('plugins.illuminate') end
 	}
 
-
-	use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
+	-- Buffer line
+	use {
+		'akinsho/bufferline.nvim',
+		tag = "v2.*",
+		requires = 'kyazdani42/nvim-web-devicons',
+		config = function() require("plugins.bufferline")
+		end
+	}
 
 	-- Status line
 	use {
