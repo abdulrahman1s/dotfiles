@@ -22,4 +22,6 @@ zsh
 fastfetch
 htop
 mpv
+bat
+fd-find
 ```

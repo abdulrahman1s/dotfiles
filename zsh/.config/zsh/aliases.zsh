@@ -20,3 +20,10 @@ function add_path() {
 		echo "export PATH=\"\$PATH:${p/$HOME/\$HOME}\"" >> ~/.config/zsh/variables.zsh
 		source ~/.config/zsh/variables.zsh
 }
+
+function commit_plz() {
+		git pull
+		git add .
+		git commit -m "$(curl -sk whatthecommit.com/index.txt)"
+		git push
+}

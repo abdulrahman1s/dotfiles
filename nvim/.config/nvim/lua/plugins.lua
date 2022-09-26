@@ -123,6 +123,11 @@ return packer.startup(function(use)
 		config = function() require('spellsitter').setup() end
 	}
 
+	-- Create missing folders on save
+	use {
+		'jghauser/mkdir.nvim'
+	}
+
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
