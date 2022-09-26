@@ -12,6 +12,7 @@ alias tree="exa --tree --icons"
 alias untar="tar -xzvf"
 alias shutup="killall -KILL"
 alias \$=""
+alias cd="z"
 
 function what() { curl cheat.sh/$@ }
 function add_path() {

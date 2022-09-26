@@ -1,4 +1,4 @@
-return require('nvim-treesitter.configs').setup({
+require('nvim-treesitter.configs').setup({
 		auto_install = true,
 		ensure_installed = {
 				'lua',
@@ -13,9 +13,11 @@ return require('nvim-treesitter.configs').setup({
 		},
 		highlight = {
 				enable = true,
-				additional_vim_regex_highlighting = true
+				additional_vim_regex_highlighting = false,
+				use_languagetree = true
 		},
 		indent = {
 				enable = true,
 		},
 })
+

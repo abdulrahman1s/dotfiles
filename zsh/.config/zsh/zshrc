@@ -14,3 +14,5 @@ zstyle ':completion:*' menu select
 . ~/.config/zsh/zinit.zsh
 . ~/.config/zsh/plugins.zsh
 . ~/.config/zsh/aliases.zsh
+
+eval "$(zoxide init zsh)"

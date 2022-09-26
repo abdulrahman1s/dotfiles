@@ -22,6 +22,12 @@ opt.scrolloff=8
 -- [Tab] will insert 4 spaces
 opt.tabstop = 4
 
+-- Enable Spell Checking
+opt.spell = true
+
 -- Map <leader> to space
 g.mapleader = ' '
 g.maplocalleader = ' '
+
+-- Auto start COQ
+g.coq_settings = { auto_start = 'shut-up' }

@@ -40,11 +40,6 @@ packer.init({
 return packer.startup(function(use)
 	use 'wbthomason/packer.nvim'
 
-	use {
-		"Pocco81/auto-save.nvim",
-		config = function() require('plugins.auto-save') end,
-	}
-
 	-- LSP
 	use {
 		"williamboman/mason.nvim",
@@ -52,27 +47,38 @@ return packer.startup(function(use)
 		"neovim/nvim-lspconfig"
 	}
 
-	-- CMP plugins
+	-- Code Completion
 	use {
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/nvim-cmp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-nvim-lua",
-		"saadparwaiz1/cmp_luasnip"
+		"ms-jpq/coq_nvim",
+		branch = "coq",
+		requires = {
+			{
+				"ms-jpq/coq.artifacts",
+				branch = "artifacts"
+			},
+			{
+				"ms-jpq/coq.thirdparty",
+				branch = "3p"
+			}
+		}
 	}
 
-	-- Snippets
+	-- Utility
 	use {
-		"L3MON4D3/LuaSnip",
-		"rafamadriz/friendly-snippets"
+		'echasnovski/mini.nvim',
+		config = function() require('plugins.mini') end
 	}
 
 	use {
-		'RRethy/vim-illuminate',
-		config = function() require('plugins.illuminate') end
+		"NvChad/nvim-colorizer.lua",
+		config = function() require('plugins.colorizer') end
 	}
+
+	use {
+		"ray-x/lsp_signature.nvim",
+		config = function() require('plugins.signature') end
+	}
+
 
 	-- Buffer line
 	use {
@@ -97,7 +103,8 @@ return packer.startup(function(use)
 	}
 
 	-- Theme
-	use { "catppuccin/nvim", as = "catppuccin",
+	use {
+		"catppuccin/nvim", as = "catppuccin",
 		config = function() require('plugins.catppuccin') end
 	}
 
@@ -108,9 +115,12 @@ return packer.startup(function(use)
 		config = function() require('plugins.treesitter') end
 	}
 
+
+	-- Spell Checker
+	-- Note: Remove this once you update to v8
 	use {
-		'numToStr/Comment.nvim',
-		config = function() require('plugins.comment') end
+		'lewis6991/spellsitter.nvim',
+		config = function() require('spellsitter').setup() end
 	}
 
 
