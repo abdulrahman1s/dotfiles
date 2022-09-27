@@ -2,6 +2,7 @@ require('mason').setup()
 local installer = require('mason-lspconfig')
 local lsp = require('lspconfig')
 local coq = require('coq')
+local inlayhints = require("lsp-inlayhints").on_attach
 
 local servers = { "sumneko_lua", "tsserver", "jsonls", "bashls" }
 
@@ -58,6 +59,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 for _, server in pairs(servers) do
 	local opts = {
 		on_attach = function(client, bufnr)
+			inlayhints(client, bufnr)
+
 			local function map(m, k, cmd)
 				vim.keymap.set(m, k, cmd, { noremap = true, silent = true, buffer = bufnr })
 			end
@@ -111,7 +114,7 @@ for _, server in pairs(servers) do
 		},
 	}
 
-	local has_custom_opts, server_custom_opts = pcall(require, "lsp_settings." .. server)
+	local has_custom_opts, server_custom_opts = pcall(require, "servers." .. server)
 
 	if has_custom_opts then
 		opts = vim.tbl_deep_extend("force", opts, server_custom_opts)

@@ -40,6 +40,9 @@ packer.init({
 return packer.startup(function(use)
 	use 'wbthomason/packer.nvim'
 
+	-- cache modules to improve load time
+	use 'lewis6991/impatient.nvim'
+
 	-- LSP
 	use {
 		"williamboman/mason.nvim",
@@ -108,6 +111,11 @@ return packer.startup(function(use)
 		requires = 'kyazdani42/nvim-web-devicons',
 		tag = 'nightly', -- optional, updated every week. (see issue #1193)
 		config = function() require("nvim-tree").setup() end
+	}
+
+	use {
+		"lvimuser/lsp-inlayhints.nvim",
+		config = function() require('plugins.inlayhints') end
 	}
 
 	-- Theme

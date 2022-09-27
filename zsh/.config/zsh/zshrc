@@ -1,6 +1,6 @@
 HISTFILE=~/.histfile
-HISTSIZE=3000
-SAVEHIST=3000
+HISTSIZE=10000
+SAVEHIST=10000
 CASE_SENSITIVE="true"
 
 setopt autocd extendedglob nomatch notify
