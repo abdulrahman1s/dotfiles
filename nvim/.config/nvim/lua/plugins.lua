@@ -96,10 +96,18 @@ return packer.startup(function(use)
 		config = function() require('plugins.lualine') end
 	}
 
-	-- File Picker
+	-- File Finder
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.x',
 		requires = 'nvim-lua/plenary.nvim'
+	}
+
+	-- File Explorer
+	use {
+		'kyazdani42/nvim-tree.lua',
+		requires = 'kyazdani42/nvim-web-devicons',
+		tag = 'nightly', -- optional, updated every week. (see issue #1193)
+		config = function() require("nvim-tree").setup() end
 	}
 
 	-- Theme

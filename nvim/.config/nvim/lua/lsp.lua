@@ -24,6 +24,7 @@ end
 
 
 vim.diagnostic.config({
+	virtual_text = false,
 	-- show signs
 	signs = {
 		active = signs,
@@ -53,6 +54,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 })
 
 
+
 for _, server in pairs(servers) do
 	local opts = {
 		on_attach = function(client, bufnr)
@@ -60,16 +62,33 @@ for _, server in pairs(servers) do
 				vim.keymap.set(m, k, cmd, { noremap = true, silent = true, buffer = bufnr })
 			end
 
+			map('n', 'D', vim.diagnostic.open_float)
+
 			map('n', 'K', vim.lsp.buf.hover)
 
 			-- Format
 			map('n', '<leader>f', vim.lsp.buf.formatting)
 
 			-- Code Action
-			map('n', 'ca', vim.lsp.buf.code_action)
+			map('n', '<leader>ca', vim.lsp.buf.code_action)
 
 			-- Rename
-			map('n', 'rn', vim.lsp.buf.rename)
+			map('n', '<leader>rn', vim.lsp.buf.rename)
+
+
+			if client.server_capabilities.documentHighlightProvider then
+				local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+				vim.api.nvim_create_autocmd("CursorHold", {
+					callback = vim.lsp.buf.document_highlight,
+					buffer = bufnr,
+					group = group
+				})
+				vim.api.nvim_create_autocmd("CursorMoved", {
+					callback = vim.lsp.buf.clear_references,
+					buffer = bufnr,
+					group = group,
+				})
+			end
 		end,
 		capabilities = vim.lsp.protocol.make_client_capabilities()
 	}

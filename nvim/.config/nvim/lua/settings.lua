@@ -25,6 +25,8 @@ opt.tabstop = 4
 -- Enable Spell Checking
 opt.spell = true
 
+opt.cmdheight = 1
+
 -- Map <leader> to space
 g.mapleader = ' '
 g.maplocalleader = ' '

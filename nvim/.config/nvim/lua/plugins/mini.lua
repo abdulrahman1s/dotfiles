@@ -1,6 +1,3 @@
--- Auto pairs
-require('mini.pairs').setup()
-
 -- Comment lines
 require('mini.comment').setup({
 	mappings = {
@@ -9,9 +6,5 @@ require('mini.comment').setup({
 	}
 })
 
--- Auto highlight word under cursor
-require('mini.cursorword').setup({
-	delay = 200
-})
-
+-- To change quotes to whatever I want
 require('mini.surround').setup()
