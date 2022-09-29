@@ -1,10 +1,18 @@
 require('mason').setup()
+
 local installer = require('mason-lspconfig')
 local lsp = require('lspconfig')
 local coq = require('coq')
-local inlayhints = require("lsp-inlayhints").on_attach
+local inlayhints = require('lsp-inlayhints').on_attach
+local map = require('util').map
+local autocmd = require('util').autocmd
 
-local servers = { "sumneko_lua", "tsserver", "jsonls", "bashls" }
+local servers = {
+	'sumneko_lua', -- Lua
+	'tsserver', -- Typescript/Javascript
+	'jsonls', -- JSON
+	'bashls' -- Bash/ZSH
+}
 
 installer.setup({
 	ensure_installed = servers,
@@ -13,14 +21,14 @@ installer.setup({
 
 
 local signs = {
-	{ name = 'DiagnosticSignError', text = "" },
-	{ name = 'DiagnosticSignWarn', text = "" },
-	{ name = 'DiagnosticSignHint', text = "" },
-	{ name = 'DiagnosticSignInfo', text = "" },
+	{ name = 'DiagnosticSignError', text = '' },
+	{ name = 'DiagnosticSignWarn', text = '' },
+	{ name = 'DiagnosticSignHint', text = '' },
+	{ name = 'DiagnosticSignInfo', text = '' },
 }
 
 for _, sign in ipairs(signs) do
-	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
 end
 
 
@@ -58,39 +66,25 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 for _, server in pairs(servers) do
 	local opts = {
-		on_attach = function(client, bufnr)
-			inlayhints(client, bufnr)
+		on_attach = function(client, buffer)
+			inlayhints(client, buffer)
 
-			local function map(m, k, cmd)
-				vim.keymap.set(m, k, cmd, { noremap = true, silent = true, buffer = bufnr })
-			end
-
-			map('n', 'D', vim.diagnostic.open_float)
-
-			map('n', 'K', vim.lsp.buf.hover)
+			map('n', 'D', vim.diagnostic.open_float, buffer)
+			map('n', 'K', vim.lsp.buf.hover, buffer)
 
 			-- Format
-			map('n', '<leader>f', vim.lsp.buf.formatting)
+			map('n', '<leader>f', vim.lsp.buf.formatting, buffer)
 
 			-- Code Action
-			map('n', '<leader>ca', vim.lsp.buf.code_action)
+			map('n', '<leader>ca', vim.lsp.buf.code_action, buffer)
 
 			-- Rename
-			map('n', '<leader>rn', vim.lsp.buf.rename)
+			map('n', '<leader>rn', vim.lsp.buf.rename, buffer)
 
 
 			if client.server_capabilities.documentHighlightProvider then
-				local group = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-				vim.api.nvim_create_autocmd("CursorHold", {
-					callback = vim.lsp.buf.document_highlight,
-					buffer = bufnr,
-					group = group
-				})
-				vim.api.nvim_create_autocmd("CursorMoved", {
-					callback = vim.lsp.buf.clear_references,
-					buffer = bufnr,
-					group = group,
-				})
+				autocmd("CursorHold", vim.lsp.buf.document_highlight, { buffer = buffer })
+				autocmd("CursorMoved", vim.lsp.buf.clear_references, { buffer = buffer })
 			end
 		end,
 		capabilities = vim.lsp.protocol.make_client_capabilities()
