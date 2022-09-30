@@ -1,5 +1,6 @@
-local util = require('lspconfig').util
-
 return {
-		root_dir = util.root_pattren("*.zsh", "*.bash", "*.sh")
+	filetypes = { "sh", "bash", "zsh" },
+	cmd_env = {
+		GLOB_PATTERN = "**/*@(.sh|.inc|.bash|.command|.zsh|zshrc|zsh_*)"
+	}
 }

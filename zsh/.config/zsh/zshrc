@@ -1,14 +1,43 @@
+# Save history file at ~/.histfile
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
-CASE_SENSITIVE="true"
+# Format history commands to :timestamp :cmd
+HISTTIMEFORMAT="[%F %T] "
 
-setopt autocd extendedglob nomatch notify
+
+setopt APPENDHISTORY             # Sessions will append their history list to the history file, rather than replace it.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt AUTOCD                    # Auto cd
+setopt EXTENDEDGLOB              # Treat the ‘#’, ‘~’ and ‘^’ characters as part of patterns for filename generation,
+setopt NOMATCH                   # If a pattern for filename generation has no matches, print an error, instead of leaving it unchanged in the argument list. 
+setopt NOTIFY                    # Report the status of background jobs immediately, rather than waiting until just before printing a prompt.
+
+# VI Mode
 bindkey -e
-zstyle :compinstall filename '/home/abdulrahman/.zshrc'
+
+zstyle :compinstall filename $HOME/.zshrc
+
+# initialize completion
 autoload -Uz compinit && compinit
+
+# Make auto completion case-insensitive 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+# Completion menu
 zstyle ':completion:*' menu select
+
+# Sort file matches by last access
+zstyle ':completion:*' file-sort access
+
+# Colorful Completion List
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Cache completion, may reduce time
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $HOME/.zcompcache
 
 . ~/.config/zsh/variables.zsh
 . ~/.config/zsh/zinit.zsh
@@ -16,4 +45,5 @@ zstyle ':completion:*' menu select
 . ~/.config/zsh/aliases.zsh
 . ~/.config/zsh/functions.zsh
 
-eval "$(zoxide init zsh)"
+# Smarter cd
+[ -x /usr/bin/zoxide ] && eval "$(zoxide init zsh)"

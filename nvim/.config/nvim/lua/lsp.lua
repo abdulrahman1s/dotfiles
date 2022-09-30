@@ -11,7 +11,8 @@ local servers = {
 	'sumneko_lua', -- Lua
 	'tsserver', -- Typescript/Javascript
 	'jsonls', -- JSON
-	'bashls' -- Bash/ZSH
+	'bashls', -- Bash/ZSH
+	'pyright', -- Python
 }
 
 installer.setup({
