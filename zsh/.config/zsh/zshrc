@@ -1,3 +1,4 @@
+
 # Save history file at ~/.histfile
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -22,6 +23,7 @@ zstyle :compinstall filename $HOME/.zshrc
 
 # initialize completion
 autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
 # Make auto completion case-insensitive 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
@@ -47,5 +49,9 @@ zstyle ':completion:*' cache-path $HOME/.zcompcache
 
 # Private variables
 [ -f ~/.config/zsh/variables.private.zsh ] && . ~/.config/zsh/variables.private.zsh 
+
+
+[ -x ~/.local/bin/fastfetch ] && fastfetch
+
 # Smarter cd
 [ -x /usr/bin/zoxide ] && eval "$(zoxide init zsh)"

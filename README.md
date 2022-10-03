@@ -24,4 +24,10 @@ htop
 mpv
 bat
 fd-find
+aria2c
+
+unrar
+p7zip
+p7zip-plugins
+
 ```
