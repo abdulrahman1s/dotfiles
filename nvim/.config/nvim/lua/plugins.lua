@@ -43,6 +43,7 @@ return packer.startup(function(use)
 	-- cache modules to improve load time
 	use 'lewis6991/impatient.nvim'
 
+
 	-- LSP
 	use {
 		"williamboman/mason.nvim",
@@ -102,7 +103,12 @@ return packer.startup(function(use)
 	-- File Finder
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.x',
-		requires = 'nvim-lua/plenary.nvim'
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'xiyaowong/telescope-emoji.nvim', -- Emojis
+			'BurntSushi/ripgrep'
+		},
+		config = function() require('plugins.telescope') end
 	}
 
 	-- File Explorer

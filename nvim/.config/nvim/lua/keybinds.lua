@@ -4,8 +4,14 @@ local map = require('util').map
 map('n', '<C-Q>', '<CMD>q<CR>')
 
 -- Open file finder
-map('n', '<leader>\\', '<CMD>Telescope find_files<CR>')
 map('n', '<leader>e', '<CMD>NvimTreeToggle<CR>')
+
+
+-- Telescope hotkeys
+map('n', 'ff', '<CMD>Telescope find_files<CR>')
+map('n', 'fe', '<CMD>Telescope emoji<CR>')
+map('n', 'fr', '<CMD>Telescope lsp_references<CR>')
+map('n', 'fd', '<CMD>Telescope diagnostics<CR>')
 
 -- Move line up and down in NORMAL and VISUAL modes
 map('n', '<C-j>', '<CMD>move .+1<CR>')
