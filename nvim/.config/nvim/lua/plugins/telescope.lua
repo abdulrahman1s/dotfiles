@@ -12,4 +12,6 @@ telescope.setup({
 })
 
 telescope.load_extension('emoji')
+telescope.load_extension('command_center')
+telescope.load_extension("notify")
 -- telescope.load_extension('fzy_native')

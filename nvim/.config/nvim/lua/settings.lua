@@ -19,8 +19,15 @@ opt.hlsearch = false
 
 opt.scrolloff=8
 
--- [Tab] will insert 4 spaces
 opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
+opt.smartindent = true
+
+-- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+-- delays and poor user experience.
+opt.updatetime = 50
 
 -- Enable Spell Checking
 opt.spell = true
