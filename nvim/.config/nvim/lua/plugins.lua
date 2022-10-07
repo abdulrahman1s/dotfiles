@@ -51,26 +51,36 @@ return packer.startup(function(use)
         "neovim/nvim-lspconfig"
     }
 
-    -- Code Completion
+    -- Autocompletion plugin
     use {
-        "ms-jpq/coq_nvim",
-        branch = "coq",
+        'hrsh7th/nvim-cmp',
         requires = {
-            {
-                "ms-jpq/coq.artifacts",
-                branch = "artifacts"
-            },
-            {
-                "ms-jpq/coq.thirdparty",
-                branch = "3p"
-            }
-        }
+            "hrsh7th/cmp-cmdline",
+            'hrsh7th/cmp-nvim-lsp',
+            "hrsh7th/cmp-path",
+            'saadparwaiz1/cmp_luasnip',
+            'L3MON4D3/LuaSnip'
+        },
+        config = function() require('plugins.cmp') end
+    }
+
+    -- Snippets
+    use {
+        "L3MON4D3/LuaSnip",
+        "rafamadriz/friendly-snippets"
     }
 
     -- Utility
     use {
         'echasnovski/mini.nvim',
         config = function() require('plugins.mini') end
+    }
+
+    use {
+        "ziontee113/syntax-tree-surfer",
+        config = function()
+            require("syntax-tree-surfer").setup()
+        end
     }
 
     use {
