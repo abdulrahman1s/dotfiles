@@ -51,9 +51,8 @@ zstyle ':completion:*' cache-path $HOME/.zcompcache
 [ -f ~/.config/zsh/variables.private.zsh ] && . ~/.config/zsh/variables.private.zsh 
 
 
-command -v fastfetch && fastfetch
+command -v fastfetch &> /dev/null && fastfetch
 
 # Smarter cd
-command -v zoxide && eval "$(zoxide init zsh)"
-
+command -v zoxide &> /dev/null && eval "$(zoxide init zsh)"
 
